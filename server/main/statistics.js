@@ -23,10 +23,11 @@ const Statistics = function (logger, client, config, configMain, template) {
   this.master = {
     executor: _this.client.master.commands.executor,
     current: _this.client.master.commands.current,
-    historical: _this.client.master.commands.historical };
+    historical: _this.client.master.commands.historical
+  };
 
   // Handle Current Metadata Updates
-  this.handleCurrentMetadata = function(miners, workers, total, blockType) {
+  this.handleCurrentMetadata = function (miners, workers, total, blockType) {
 
     // Calculate Features of Metadata
     const algorithm = _this.config.primary.coin.algorithm || 'sha256d';
@@ -44,7 +45,7 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Current Miners Updates
-  this.handleCurrentMiners = function(hashrate, miners, blockType) {
+  this.handleCurrentMiners = function (hashrate, miners, blockType) {
 
     // Calculate Features of Miners
     const timestamp = Date.now();
@@ -55,7 +56,7 @@ const Statistics = function (logger, client, config, configMain, template) {
     // Return Miners Updates
     return miners.map((miner) => {
       const filtered = hashrate.filter((share) => share.miner === miner.miner);
-      const minerHash = filtered[0] || { current_work: 0 };
+      const minerHash = filtered[0] || {current_work: 0};
       return {
         timestamp: timestamp,
         miner: miner.miner,
@@ -66,20 +67,17 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Workers Updates
-  this.handleCurrentWorkers = function(hashrate, workers, blockType) {
-
+  this.handleCurrentWorkers = function (hashrate, workers, blockType) {
     // Calculate Features of Workers
     const timestamp = Date.now();
     const algorithm = _this.config.primary.coin.algorithm || 'sha256d';
     const multiplier = Math.pow(2, 32) / _this.template.algorithms[algorithm].multiplier || 1;
     const section = _this.config.settings.window.hashrate;
 
-    console.log(algorithm, multiplier, section, hashrate, workers, blockType);
-
     // Return Workers Updates
     return workers.map((worker) => {
       const filtered = hashrate.filter((share) => share.worker === worker.worker);
-      const workerHash = filtered[0] || { current_work: 0 };
+      const workerHash = filtered[0] || {current_work: 0};
       return {
         timestamp: timestamp,
         miner: (worker.worker || '').split('.')[0],
@@ -92,7 +90,7 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Historical Metadata Updates
-  this.handleHistoricalMetadata = function(metadata) {
+  this.handleHistoricalMetadata = function (metadata) {
 
     // Calculate Features of Metadata
     const timestamp = Date.now();
@@ -118,7 +116,7 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Historical Miners Updates
-  this.handleHistoricalMiners = function(miners) {
+  this.handleHistoricalMiners = function (miners) {
 
     // Calculate Features of Miners
     const timestamp = Date.now();
@@ -144,7 +142,7 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Historical Network Updates
-  this.handleHistoricalNetwork = function(network) {
+  this.handleHistoricalNetwork = function (network) {
 
     // Calculate Features of Network
     const timestamp = Date.now();
@@ -163,7 +161,7 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Historical Workers Updates
-  this.handleHistoricalWorkers = function(workers) {
+  this.handleHistoricalWorkers = function (workers) {
 
     // Calculate Features of Workers
     const timestamp = Date.now();
@@ -191,7 +189,7 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Primary Updates
-  this.handlePrimary = function(lookups, callback) {
+  this.handlePrimary = function (lookups, callback) {
 
     // Build Combined Transaction
     const transaction = ['BEGIN;'];
@@ -282,7 +280,7 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Auxiliary Updates
-  this.handleAuxiliary = function(lookups, callback) {
+  this.handleAuxiliary = function (lookups, callback) {
 
     // Build Combined Transaction
     const transaction = ['BEGIN;'];
@@ -373,7 +371,7 @@ const Statistics = function (logger, client, config, configMain, template) {
   };
 
   // Handle Statistics Updates
-  this.handleStatistics = function(blockType, callback) {
+  this.handleStatistics = function (blockType, callback) {
 
     // Handle Initial Logging
     const starting = [_this.text.databaseStartingText1(blockType)];
@@ -395,14 +393,20 @@ const Statistics = function (logger, client, config, configMain, template) {
       _this.master.current.hashrate.sumCurrentHashrateWorker(_this.pool, hashrateWindow, true, blockType),
       _this.master.current.hashrate.sumCurrentHashrateWorker(_this.pool, hashrateWindow, false, blockType),
       _this.master.current.hashrate.sumCurrentHashrateType(_this.pool, hashrateWindow, false, blockType),
-      _this.master.current.metadata.selectCurrentMetadataMain(_this.pool, { type: blockType }),
+      _this.master.current.metadata.selectCurrentMetadataMain(_this.pool, {type: blockType}),
       _this.master.current.miners.deleteCurrentMinersInactive(_this.pool, inactiveWindow),
-      _this.master.current.miners.selectCurrentMinersMain(_this.pool, { type: blockType }),
-      _this.master.current.network.selectCurrentNetworkMain(_this.pool, { type: blockType }),
+      _this.master.current.miners.selectCurrentMinersMain(_this.pool, {type: blockType}),
+      _this.master.current.network.selectCurrentNetworkMain(_this.pool, {type: blockType}),
       _this.master.current.transactions.deleteCurrentTransactionsInactive(_this.pool, updateWindow),
       _this.master.current.workers.deleteCurrentWorkersInactive(_this.pool, inactiveWindow),
-      _this.master.current.workers.selectCurrentWorkersMain(_this.pool, { solo: true, type: blockType }),
-      _this.master.current.workers.selectCurrentWorkersMain(_this.pool, { solo: false, type: blockType }),
+      _this.master.current.workers.selectCurrentWorkersMain(_this.pool, {
+        solo: true,
+        type: blockType
+      }),
+      _this.master.current.workers.selectCurrentWorkersMain(_this.pool, {
+        solo: false,
+        type: blockType
+      }),
       'COMMIT;'];
 
     // Establish Separate Behavior
@@ -419,7 +423,7 @@ const Statistics = function (logger, client, config, configMain, template) {
       });
       break;
 
-    // Auxiliary Behavior
+      // Auxiliary Behavior
     case 'auxiliary':
       _this.master.executor(transaction, (lookups) => {
         _this.handleAuxiliary(lookups, () => {
@@ -430,7 +434,7 @@ const Statistics = function (logger, client, config, configMain, template) {
       });
       break;
 
-    // Default Behavior
+      // Default Behavior
     default:
       callback();
       break;
@@ -439,20 +443,22 @@ const Statistics = function (logger, client, config, configMain, template) {
 
   // Start Statistics Interval Management
   /* istanbul ignore next */
-  this.handleInterval = function() {
+  this.handleInterval = function () {
     const interval = _this.config.settings.interval.statistics;
     setTimeout(() => {
       _this.handleInterval();
-      if (_this.config.primary.checks.enabled) _this.handleStatistics('primary', () => {});
+      if (_this.config.primary.checks.enabled) _this.handleStatistics('primary', () => {
+      });
       if (_this.config.auxiliary && _this.config.auxiliary.enabled && _this.config.auxiliary.checks.enabled) {
-        _this.handleStatistics('auxiliary', () => {});
+        _this.handleStatistics('auxiliary', () => {
+        });
       }
     }, interval);
   };
 
   // Start Statistics Capabilities
   /* istanbul ignore next */
-  this.setupStatistics = function(callback) {
+  this.setupStatistics = function (callback) {
     const interval = _this.config.settings.interval.statistics;
     const numForks = utils.countProcessForks(_this.configMain);
     const timing = parseFloat(_this.forkId) * interval / numForks;

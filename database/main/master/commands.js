@@ -41,8 +41,8 @@ const Commands = function (logger, client, configMain) {
 
   // Execute Commands
   /* eslint-disable */
-  this.executor = function(commands, callback) {
-    const query = commands.join(' ')
+  this.executor = function (commands, callback) {
+    const query = commands.join(' ');
     _this.client.query(query, (error, results) => {
       if (error) _this.retry(commands, error, callback);
       else callback(results);
@@ -50,7 +50,7 @@ const Commands = function (logger, client, configMain) {
   };
 
   // Handle Retries
-  this.retry = function(commands, error, callback) {
+  this.retry = function (commands, error, callback) {
     if (_this.retries < 3) {
       const lines = [_this.text.databaseCommandsText3(_this.retries)];
       _this.logger.error('Database', 'Master', lines);
@@ -58,7 +58,9 @@ const Commands = function (logger, client, configMain) {
         _this.executor(commands, callback);
         _this.retries += 1;
       }, _this.timing[_this.retries] || 1000);
-    } else throw new Error(error);
+    } else {
+      console.log(`Something went wrong -> ${error}`, commands);
+    }
   };
 
   // Build Out Schema Generation

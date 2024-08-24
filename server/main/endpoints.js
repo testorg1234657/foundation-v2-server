@@ -16,18 +16,35 @@ const Endpoints = function (logger, client, configMain) {
   this.master = {
     executor: _this.client.master.commands.executor,
     current: _this.client.master.commands.current,
-    historical: _this.client.master.commands.historical };
+    historical: _this.client.master.commands.historical
+  };
 
   // Handle Blocks Queries
-  this.handleCurrentBlocks = function(pool, queries, callback) {
+  this.handleCurrentBlocks = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', submitted: 'number', miner: 'string',
-      worker: 'string', category: 'string', confirmations: 'number', difficulty: 'number',
-      hash: 'string', height: 'number', identifier: 'string', luck: 'number',
-      reward: 'number', round: 'string', solo: 'boolean', transaction: 'string',
-      type: 'string' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      submitted: 'number',
+      miner: 'string',
+      worker: 'string',
+      category: 'string',
+      confirmations: 'number',
+      difficulty: 'number',
+      hash: 'string',
+      height: 'number',
+      identifier: 'string',
+      luck: 'number',
+      reward: 'number',
+      round: 'string',
+      solo: 'boolean',
+      transaction: 'string',
+      type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validCategories = ['pending', 'immature', 'generate', 'orphan', 'confirmed'];
@@ -42,7 +59,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -77,12 +94,22 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Hashrate Queries
-  this.handleCurrentHashrate = function(pool, queries, callback) {
+  this.handleCurrentHashrate = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', worker: 'string',
-      identifier: 'string', share: 'string', solo: 'boolean', type: 'string' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      worker: 'string',
+      identifier: 'string',
+      share: 'string',
+      solo: 'boolean',
+      type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -95,7 +122,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -127,14 +154,27 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Metadata Queries
-  this.handleCurrentMetadata = function(pool, queries, callback) {
+  this.handleCurrentMetadata = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', blocks: 'number', efficiency: 'number',
-      effort: 'number', hashrate: 'number', invalid: 'number', miners: 'number',
-      stale: 'number', type: 'string', valid: 'number', work: 'number',
-      workers: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      blocks: 'number',
+      efficiency: 'number',
+      effort: 'number',
+      hashrate: 'number',
+      invalid: 'number',
+      miners: 'number',
+      stale: 'number',
+      type: 'string',
+      valid: 'number',
+      work: 'number',
+      workers: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -147,7 +187,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -176,14 +216,28 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Miners Queries
-  this.handleCurrentMiners = function(pool, queries, callback) {
+  this.handleCurrentMiners = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', balance: 'number',
-      efficiency: 'number', effort: 'number', generate: 'number', hashrate: 'number',
-      immature: 'number', invalid: 'number', paid: 'number', stale: 'number',
-      type: 'string', valid: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      balance: 'number',
+      efficiency: 'number',
+      effort: 'number',
+      generate: 'number',
+      hashrate: 'number',
+      immature: 'number',
+      invalid: 'number',
+      paid: 'number',
+      stale: 'number',
+      type: 'string',
+      valid: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -196,7 +250,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -225,12 +279,20 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Network Queries
-  this.handleCurrentNetwork = function(pool, queries, callback) {
+  this.handleCurrentNetwork = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', difficulty: 'number', hashrate: 'number',
-      height: 'number', type: 'string' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      difficulty: 'number',
+      hashrate: 'number',
+      height: 'number',
+      type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -242,7 +304,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -271,11 +333,13 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Payments Queries
-  this.handleCurrentPayments = function(pool, queries, callback) {
+  this.handleCurrentPayments = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', round: 'string', type: 'string' };
+    const parameters = {
+      limit: 'special', offset: 'special', order: 'special',
+      direction: 'special', timestamp: 'number', round: 'string', type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -288,7 +352,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -320,14 +384,27 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Rounds Queries
-  this.handleCurrentRounds = function(pool, queries, callback) {
+  this.handleCurrentRounds = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', worker: 'string',
-      identifier: 'string', invalid: 'number', round: 'string', solo: 'boolean',
-      stale: 'number', times: 'number', type: 'string', valid: 'number',
-      work: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      worker: 'string',
+      identifier: 'string',
+      invalid: 'number',
+      round: 'string',
+      solo: 'boolean',
+      stale: 'number',
+      times: 'number',
+      type: 'string',
+      valid: 'number',
+      work: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -341,7 +418,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -373,11 +450,13 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Transactions Queries
-  this.handleCurrentTransactions = function(pool, queries, callback) {
+  this.handleCurrentTransactions = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', round: 'string', type: 'string' };
+    const parameters = {
+      limit: 'special', offset: 'special', order: 'special',
+      direction: 'special', timestamp: 'number', round: 'string', type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -390,7 +469,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -422,13 +501,26 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Workers Queries
-  this.handleCurrentWorkers = function(pool, queries, callback) {
+  this.handleCurrentWorkers = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', worker: 'string',
-      efficiency: 'number', effort: 'number', hashrate: 'number', invalid: 'number',
-      solo: 'boolean', stale: 'number', type: 'string', valid: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      worker: 'string',
+      efficiency: 'number',
+      effort: 'number',
+      hashrate: 'number',
+      invalid: 'number',
+      solo: 'boolean',
+      stale: 'number',
+      type: 'string',
+      valid: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -440,7 +532,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -469,15 +561,31 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Blocks Queries
-  this.handleHistoricalBlocks = function(pool, queries, callback) {
+  this.handleHistoricalBlocks = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', submitted: 'number', timestamp: 'number', miner: 'string',
-      worker: 'string', category: 'string', confirmations: 'number', difficulty: 'number',
-      hash: 'string', height: 'number', identifier: 'string', luck: 'number',
-      reward: 'number', round: 'string', solo: 'boolean', transaction: 'string',
-      type: 'string' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      submitted: 'number',
+      timestamp: 'number',
+      miner: 'string',
+      worker: 'string',
+      category: 'string',
+      confirmations: 'number',
+      difficulty: 'number',
+      hash: 'string',
+      height: 'number',
+      identifier: 'string',
+      luck: 'number',
+      reward: 'number',
+      round: 'string',
+      solo: 'boolean',
+      transaction: 'string',
+      type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validCategories = ['pending', 'immature', 'generate', 'orphan', 'confirmed'];
@@ -492,7 +600,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -527,13 +635,27 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Metadata Queries
-  this.handleHistoricalMetadata = function(pool, queries, callback) {
+  this.handleHistoricalMetadata = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', blocks: 'number', efficiency: 'number',
-      effort: 'number', hashrate: 'number', invalid: 'number', miners: 'number',
-      stale: 'number', type: 'string', valid: 'number', work: 'number', workers: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      blocks: 'number',
+      efficiency: 'number',
+      effort: 'number',
+      hashrate: 'number',
+      invalid: 'number',
+      miners: 'number',
+      stale: 'number',
+      type: 'string',
+      valid: 'number',
+      work: 'number',
+      workers: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -546,7 +668,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -575,13 +697,24 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Miners Queries
-  this.handleHistoricalMiners = function(pool, queries, callback) {
+  this.handleHistoricalMiners = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', efficiency: 'number',
-      effort: 'number', hashrate: 'number', invalid: 'number', stale: 'number',
-      type: 'string', valid: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      efficiency: 'number',
+      effort: 'number',
+      hashrate: 'number',
+      invalid: 'number',
+      stale: 'number',
+      type: 'string',
+      valid: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -593,7 +726,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -622,12 +755,20 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Network Queries
-  this.handleHistoricalNetwork = function(pool, queries, callback) {
+  this.handleHistoricalNetwork = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', difficulty: 'number', hashrate: 'number',
-      height: 'number', type: 'string' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      difficulty: 'number',
+      hashrate: 'number',
+      height: 'number',
+      type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -639,7 +780,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -668,12 +809,20 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Payments Queries
-  this.handleHistoricalPayments = function(pool, queries, callback) {
+  this.handleHistoricalPayments = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', amount: 'number',
-      transaction: 'string', type: 'string' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      amount: 'number',
+      transaction: 'string',
+      type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -685,7 +834,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -714,13 +863,27 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Rounds Queries
-  this.handleHistoricalRounds = function(pool, queries, callback) {
+  this.handleHistoricalRounds = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', worker: 'string',
-      identifier: 'string', invalid: 'number', round: 'string', solo: 'boolean',
-      stale: 'number', times: 'number', type: 'string', valid: 'number', work: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      worker: 'string',
+      identifier: 'string',
+      invalid: 'number',
+      round: 'string',
+      solo: 'boolean',
+      stale: 'number',
+      times: 'number',
+      type: 'string',
+      valid: 'number',
+      work: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -734,7 +897,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -766,12 +929,19 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Transactions Queries
-  this.handleHistoricalTransactions = function(pool, queries, callback) {
+  this.handleHistoricalTransactions = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', amount: 'number', transaction: 'string',
-      type: 'string' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      amount: 'number',
+      transaction: 'string',
+      type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -783,7 +953,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -812,13 +982,26 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Workers Queries
-  this.handleHistoricalWorkers = function(pool, queries, callback) {
+  this.handleHistoricalWorkers = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', worker: 'string',
-      efficiency: 'number', effort: 'number', hashrate: 'number', invalid: 'number',
-      solo: 'boolean', stale: 'number', type: 'string', valid: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      worker: 'string',
+      efficiency: 'number',
+      effort: 'number',
+      hashrate: 'number',
+      invalid: 'number',
+      solo: 'boolean',
+      stale: 'number',
+      type: 'string',
+      valid: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -830,7 +1013,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -859,15 +1042,31 @@ const Endpoints = function (logger, client, configMain) {
   };
 
   // Handle Blocks Queries
-  this.handleCombinedBlocks = function(pool, queries, callback) {
+  this.handleCombinedBlocks = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', submitted: 'number', miner: 'string',
-      worker: 'string', category: 'string', confirmations: 'number', difficulty: 'number',
-      hash: 'string', height: 'number', identifier: 'string', luck: 'number',
-      reward: 'number', round: 'string', solo: 'boolean', transaction: 'string',
-      type: 'string' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      submitted: 'number',
+      miner: 'string',
+      worker: 'string',
+      category: 'string',
+      confirmations: 'number',
+      difficulty: 'number',
+      hash: 'string',
+      height: 'number',
+      identifier: 'string',
+      luck: 'number',
+      reward: 'number',
+      round: 'string',
+      solo: 'boolean',
+      transaction: 'string',
+      type: 'string'
+    };
 
     // Accepted Values for Parameters
     const validCategories = ['pending', 'immature', 'generate', 'orphan', 'confirmed'];
@@ -882,7 +1081,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -918,20 +1117,33 @@ const Endpoints = function (logger, client, configMain) {
     _this.master.executor(transaction, (lookups) => {
       callback(200, lookups.map((data, idx) => {
         const partition = idx === 0 ? 'current' : 'historical';
-        return data.rows.map((obj) => ({ ...obj, partition: partition }));
+        return data.rows.map((obj) => ({...obj, partition: partition}));
       }).flat(1));
     });
   };
 
   // Handle Rounds Queries
-  this.handleCombinedRounds = function(pool, queries, callback) {
+  this.handleCombinedRounds = function (pool, queries, callback) {
 
     // Validated Query Types
-    const parameters = { limit: 'special', offset: 'special', order: 'special',
-      direction: 'special', timestamp: 'number', miner: 'string', worker: 'string',
-      identifier: 'string', invalid: 'number', round: 'string', solo: 'boolean',
-      stale: 'number', times: 'number', type: 'string', valid: 'number',
-      work: 'number' };
+    const parameters = {
+      limit: 'special',
+      offset: 'special',
+      order: 'special',
+      direction: 'special',
+      timestamp: 'number',
+      miner: 'string',
+      worker: 'string',
+      identifier: 'string',
+      invalid: 'number',
+      round: 'string',
+      solo: 'boolean',
+      stale: 'number',
+      times: 'number',
+      type: 'string',
+      valid: 'number',
+      work: 'number'
+    };
 
     // Accepted Values for Parameters
     const validDirection = ['ascending', 'descending'];
@@ -945,7 +1157,7 @@ const Endpoints = function (logger, client, configMain) {
       const query = Object.keys(queries)[i];
       if (!utils.handleValidation(queries[query], parameters[query])) {
         const expected = parameters[query] || 'unknown';
-        callback(400, _this.text.websiteValidationText1(query, `<${ expected }>`));
+        callback(400, _this.text.websiteValidationText1(query, `<${expected}>`));
         return;
       }
     }
@@ -978,7 +1190,7 @@ const Endpoints = function (logger, client, configMain) {
     _this.master.executor(transaction, (lookups) => {
       callback(200, lookups.map((data, idx) => {
         const partition = idx === 0 ? 'current' : 'historical';
-        return data.rows.map((obj) => ({ ...obj, partition: partition }));
+        return data.rows.map((obj) => ({...obj, partition: partition}));
       }).flat(1));
     });
   };
