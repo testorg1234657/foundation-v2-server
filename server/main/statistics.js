@@ -71,8 +71,10 @@ const Statistics = function (logger, client, config, configMain, template) {
     // Calculate Features of Workers
     const timestamp = Date.now();
     const algorithm = _this.config.primary.coin.algorithm || 'sha256d';
-    const multiplier = Math.pow(2, 32) / _this.template.algorithms[algorithm].multiplier;
+    const multiplier = Math.pow(2, 32) / _this.template.algorithms[algorithm].multiplier || 1;
     const section = _this.config.settings.window.hashrate;
+
+    console.log(algorithm, multiplier, section, hashrate, workers, blockType);
 
     // Return Workers Updates
     return workers.map((worker) => {
