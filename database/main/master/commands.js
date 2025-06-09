@@ -42,8 +42,6 @@ const Commands = function (logger, client, configMain) {
   // Execute Commands
   /* eslint-disable */
   this.executor = function (commands, callback) {
-    console.log('executor', commands);
-
     const query = commands.join(' ');
     _this.client.query(query, (error, results) => {
       if (error) _this.retry(commands, error, callback);
@@ -53,8 +51,6 @@ const Commands = function (logger, client, configMain) {
 
   // Handle Retries
   this.retry = function (commands, error, callback) {
-    console.log('command', commands);
-
     if (_this.retries < 3) {
       const lines = [_this.text.databaseCommandsText3(_this.retries)];
       _this.logger.error('Database', 'Master', lines);
@@ -63,7 +59,7 @@ const Commands = function (logger, client, configMain) {
         _this.retries += 1;
       }, _this.timing[_this.retries] || 1000);
     } else {
-      //if(error.message.includes('commands')) return;
+      if(error.message.includes('commands')) return;
 
       console.log(`Something went wrong -> ${error}`, commands);
     }
