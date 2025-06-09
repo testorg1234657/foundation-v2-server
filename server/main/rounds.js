@@ -477,6 +477,7 @@ const Rounds = function (logger, client, config, configMain) {
 
   // Handle Primary Blocks
   this.handlePrimary = function(lookups, shares, callback) {
+    console.log('handlePrimary', lookups, shares);
 
     // Calculate Block Features
     const block = shares[0];
