@@ -59,7 +59,7 @@ const Commands = function (logger, client, configMain) {
         _this.retries += 1;
       }, _this.timing[_this.retries] || 1000);
     } else {
-      if(error.message.includes('commands')) return;
+      //if(error.message.includes('commands')) return;
 
       console.log(`Something went wrong -> ${error}`, commands);
     }
